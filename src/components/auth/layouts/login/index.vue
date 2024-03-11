@@ -3,7 +3,7 @@
 import LoginForm from '../../forms/LoginForm.vue'
 </script>
 <template>
-  <main class="w-[86%] md:w-[65%] lg:w-[49.69%] 2xl:w-[35rem] mx-auto flex flex-col lg:justify-center max-lg:mt-52">
+  <main class="w-[86%] md:w-[65%] lg:w-[49.69%] 2xl:w-[35rem] mx-auto flex flex-col lg:justify-center max-lg:mt-32">
     <!-- header -->
     <section>
       <h3 class="text-2xl lg:text-3xl text-center font-medium">Online Past Projects Repository</h3>
