@@ -14,6 +14,11 @@ interface LoginForm {
   password: string
 }
 
+// emits
+const emit = defineEmits<{
+  (e: 'toggleLoginForm', index: number): void
+}>()
+
 // refs
 const ruleFormRef = ref<FormInstance>()
 
@@ -28,6 +33,9 @@ const rules = reactive<FormRules<LoginForm>>({
   ],
   password: [{ required: true, message: 'Please enter your password', trigger: ['blur', 'change'] }]
 })
+
+// functions
+const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
 
 </script>
 <template>
@@ -57,7 +65,7 @@ const rules = reactive<FormRules<LoginForm>>({
       </el-form-item>
       <!-- login as admin -->
       <div class="flex items-center justify-between">
-        <p class="text-xs font-medium underline cursor-pointer">Login as Admin?</p>
+        <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">Login as Admin?</p>
         <p class="text-xs  font-medium underline text-primary cursor-pointer">Forgot Password?</p>
       </div>
       <!-- login button -->
@@ -85,5 +93,12 @@ const rules = reactive<FormRules<LoginForm>>({
 :deep(.el-input__inner) {
   height: 3rem;
   padding: 0 0.75rem;
+}
+
+@media screen and (max-width: 768px){
+  :deep(.el-form-item__label) {
+  font-size: 0.75rem;
+
+}
 }
 </style>

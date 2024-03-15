@@ -1,19 +1,35 @@
-<script setup lang="ts">
-// components
-import LoginForm from '../../forms/LoginForm.vue'
+<script lang="ts" setup>
+// vue
+import { type Component, computed, ref } from 'vue'
+
+//components
+import AdminLogin from '@/components/auth/layouts/login/AdminLogin.vue'
+import UserLogin from '@/components/auth/layouts/login/UserLogin.vue'
+
+const ComponentLists: Component = [UserLogin, AdminLogin]
+
+// ref
+const activeComponentIndex = ref(0)
+
+// computed
+const activeComponent = computed(() => ComponentLists[activeComponentIndex.value])
+
+// functions
+const handleToggleLoginForm = (index: number) => activeComponentIndex.value = index
+
 </script>
 <template>
-  <main class="w-[86%] md:w-[65%] lg:w-[49.69%] 2xl:w-[35rem] mx-auto flex flex-col lg:justify-center max-lg:mt-32">
-    <!-- header -->
-    <section>
-      <h3 class="text-2xl lg:text-3xl text-center font-medium">Online Past Projects Repository</h3>
-      <p class="text-xs lg:text-sm text-center text-gray-1 font-normal">...of Computer Science Department, University of Ibadan.</p>
-      <div class="flex items-center gap-x-5 mt-6 w-full text-sm lg:text-lg">
-        <h4>Don't have an account?</h4>
-        <h4 class="text-primary cursor-pointer">Create one here</h4>
-      </div>
-    </section>
-    <!-- form -->
-    <login-form />
-  </main>
+  <transition name="fade" mode="out-in">
+    <component :is="activeComponent" @toggle-login-form="handleToggleLoginForm" />
+  </transition>
 </template>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
