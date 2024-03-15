@@ -22,13 +22,13 @@ const router = createRouter({
       ]
     },
     {
-      path: '/login',
+      path: '/',
       component: () => import(`@/views/auth/index.vue`),
       children: [
         {
           path: '/login',
           name: 'Login',
-          component: () => import('@/views/auth/index.vue'),
+          component: () => import('@/views/auth/Login.vue'),
           meta: { title: `Online Past Project - Login` }
         },
       ]
