@@ -5,11 +5,11 @@ import { ref, reactive } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 
 
-import PasswordIcon from '@/assets/icons/PasswordIcon.vue'
+import EmailIcon from '@/assets/icons/EmailIcon.vue'
 
 // interface
 interface LoginForm {
-  code: string
+  email: string
 }
 
 // emit
@@ -22,21 +22,16 @@ const ruleFormRef = ref<FormInstance>()
 
 // reactive
 const loginForm = reactive<LoginForm>({
-
-  code: ''
+  email: ''
 })
 const rules = reactive<FormRules<LoginForm>>({
-  code: [{ required: true, message: 'Please enter a valid admin code', trigger: ['blur', 'change'] }]
+  email: [{ required: true, message: 'Please enter a vale', trigger: ['blur', 'change'] }]
 })
-
-
-// functions
-const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
 
 
 </script>
 <template>
-  <main class="w-full mt-12 lg:mt-32">
+  <main class="w-full">
     <el-form
       hide-required-asterisk
       ref="ruleFormRef"
@@ -45,20 +40,16 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
       label-position="top"
     >
       <!-- password -->
-      <el-form-item label="Code" prop="code">
+      <el-form-item label="Email Address" prop="email">
         <el-input v-model="loginForm.email"  placeholder="Enter admin email address">
           <template #prefix>
-            <password-icon />
+            <email-icon />
           </template>
         </el-input>
       </el-form-item>
-      <!-- login as user -->
-      <div class="flex items-center justify-between">
-        <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">Login as User?</p>
-      </div>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
-        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"> Login </el-button>
+        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm">Continue</el-button>
       </div>
     </el-form>
   </main>

@@ -31,6 +31,12 @@ const router = createRouter({
           component: () => import('@/views/auth/Login.vue'),
           meta: { title: `Online Past Project - Login` }
         },
+         {
+          path: '/create-account',
+          name: 'Create Account',
+          component: () => import('@/views/auth/CreateAccount.vue'),
+          meta: { title: `Online Past Project - Create Account` }
+        },
       ]
     }]
 })
