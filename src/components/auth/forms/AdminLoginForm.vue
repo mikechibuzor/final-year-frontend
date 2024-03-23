@@ -46,7 +46,7 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
     >
       <!-- password -->
       <el-form-item label="Code" prop="code">
-        <el-input v-model="loginForm.email"  placeholder="Enter admin email address">
+        <el-input v-model="loginForm.email" type="password" show-password  placeholder="Enter admin code">
           <template #prefix>
             <password-icon />
           </template>
