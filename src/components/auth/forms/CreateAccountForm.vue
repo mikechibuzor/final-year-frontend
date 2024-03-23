@@ -7,24 +7,19 @@ import type { FormInstance, FormRules } from 'element-plus'
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
 
 // interface
-interface LoginForm {
+interface CreateAccountForm {
   email: string
 }
-
-// emit
-const emit = defineEmits<{
-  (e: 'toggleLoginForm', index: number): void
-}>()
 
 // refs
 const ruleFormRef = ref<FormInstance>()
 
 // reactive
-const loginForm = reactive<LoginForm>({
+const createAccountForm = reactive<CreateAccountForm>({
   email: ''
 })
-const rules = reactive<FormRules<LoginForm>>({
-  email: [{ required: true, message: 'Please enter a vale', trigger: ['blur', 'change'] }]
+const rules = reactive<FormRules<CreateAccountForm>>({
+  email: [{ required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }]
 })
 </script>
 <template>
@@ -32,13 +27,13 @@ const rules = reactive<FormRules<LoginForm>>({
     <el-form
       hide-required-asterisk
       ref="ruleFormRef"
-      :model="loginForm"
+      :model="createAccountForm"
       :rules="rules"
       label-position="top"
     >
       <!-- password -->
       <el-form-item label="Email Address" prop="email">
-        <el-input v-model="loginForm.email" placeholder="Enter email address">
+        <el-input v-model="createAccountForm.email" placeholder="Enter email address">
           <template #prefix>
             <email-icon />
           </template>

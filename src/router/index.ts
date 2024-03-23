@@ -10,18 +10,20 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/home'
-    },
-    {
-      path: '/home',
+      component: () => import(`@/views/app/index.vue`),
       beforeEnter: guardAppRoutes,
-      component: () => import('@/views/app/index.vue'),
       children: [
+       {
+          path: '/home',
+          name: 'HomePage',
+          component: () => import('@/views/app/HomePage.vue'),
+          meta: { title: `Web-Based Past Projects -`, pageTitle: 'Home' }
+        },
         {
           path: '/project-details/:id',
           name: 'ProjectDetails',
           component: () => import('@/views/app/ProjectDetails.vue'),
-          meta: { title: `Online Past Project -`, pageTitle: 'Project Details' }
+          meta: { title: `Web-Based Past Projects -`, pageTitle: 'Project Details' }
         }
       ]
     },
@@ -33,13 +35,19 @@ const router = createRouter({
           path: '/login',
           name: 'Login',
           component: () => import('@/views/auth/Login.vue'),
-          meta: { title: `Online Past Project - Login` }
+          meta: { title: `Web-Based Past Projects - Login` }
         },
         {
           path: '/create-account',
           name: 'Create Account',
           component: () => import('@/views/auth/CreateAccount.vue'),
-          meta: { title: `Online Past Project - Create Account` }
+          meta: { title: `Web-Based Past Projects - Create Account` }
+        },
+        {
+          path: '/check-your-email',
+          name: 'Check Your Email',
+          component: () => import('@/views/auth/CheckYourEmail.vue'),
+          meta: { title: `Web-Based Past Projects - Check Your Email` }
         }
       ]
     }
