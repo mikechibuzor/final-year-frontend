@@ -19,7 +19,9 @@ const handleToggleLoginForm = (index: number) => emit('toggleLoginForm', index)
     <!-- paragraph -->
     <p class="flex flex-col mt-16">
       <span class="text-fg-default text-xl font-medium">Create Account</span>
-      <span class="flex items-center gap-x-1 text-xs lg:text-sm text-center text-gray-1 font-normal">
+      <span
+        class="flex items-center gap-x-1 text-xs lg:text-sm text-center text-gray-1 font-normal"
+      >
         <span>Already have an account?</span>
         <router-link to="/login" class="text-primary underline">Login</router-link>
       </span>

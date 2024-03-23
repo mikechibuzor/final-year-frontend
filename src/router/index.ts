@@ -1,10 +1,14 @@
-import { createRouter, createWebHistory,  type NavigationGuardNext,
-  type RouteLocationNormalized } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  type NavigationGuardNext,
+  type RouteLocationNormalized
+} from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-   {
+    {
       path: '/',
       redirect: '/home'
     },
@@ -31,21 +35,21 @@ const router = createRouter({
           component: () => import('@/views/auth/Login.vue'),
           meta: { title: `Online Past Project - Login` }
         },
-         {
+        {
           path: '/create-account',
           name: 'Create Account',
           component: () => import('@/views/auth/CreateAccount.vue'),
           meta: { title: `Online Past Project - Create Account` }
-        },
+        }
       ]
-    }]
+    }
+  ]
 })
 function guardAppRoutes(
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext
-) { 
-
+) {
   const token = localStorage.getItem('token')
   if (token) {
     next()

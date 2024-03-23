@@ -36,7 +36,6 @@ const rules = reactive<FormRules<LoginForm>>({
 
 // functions
 const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
-
 </script>
 <template>
   <main class="w-full">
@@ -57,7 +56,12 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
       </el-form-item>
       <!-- password -->
       <el-form-item label="Password" prop="password">
-        <el-input v-model="loginForm.password" type="password" show-password placeholder="Enter your password">
+        <el-input
+          v-model="loginForm.password"
+          type="password"
+          show-password
+          placeholder="Enter your password"
+        >
           <template #prefix>
             <password-icon />
           </template>
@@ -65,12 +69,16 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
       </el-form-item>
       <!-- login as admin -->
       <div class="flex items-center justify-between">
-        <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">Login as Admin?</p>
-        <p class="text-xs  font-medium underline text-primary cursor-pointer">Forgot Password?</p>
+        <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">
+          Login as Admin?
+        </p>
+        <p class="text-xs font-medium underline text-primary cursor-pointer">Forgot Password?</p>
       </div>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
-        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"> Login </el-button>
+        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm">
+          Login
+        </el-button>
       </div>
     </el-form>
   </main>
@@ -95,10 +103,9 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
   padding: 0 0.75rem;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   :deep(.el-form-item__label) {
-  font-size: 0.75rem;
-
-}
+    font-size: 0.75rem;
+  }
 }
 </style>

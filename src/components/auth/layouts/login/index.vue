@@ -15,8 +15,7 @@ const activeComponentIndex = ref(0)
 const activeComponent = computed(() => ComponentLists[activeComponentIndex.value])
 
 // functions
-const handleToggleLoginForm = (index: number) => activeComponentIndex.value = index
-
+const handleToggleLoginForm = (index: number) => (activeComponentIndex.value = index)
 </script>
 <template>
   <transition name="fade" mode="out-in">

@@ -4,7 +4,6 @@ import { ref, reactive } from 'vue'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
 
-
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
 
 // interface
@@ -27,8 +26,6 @@ const loginForm = reactive<LoginForm>({
 const rules = reactive<FormRules<LoginForm>>({
   email: [{ required: true, message: 'Please enter a vale', trigger: ['blur', 'change'] }]
 })
-
-
 </script>
 <template>
   <main class="w-full">
@@ -41,7 +38,7 @@ const rules = reactive<FormRules<LoginForm>>({
     >
       <!-- password -->
       <el-form-item label="Email Address" prop="email">
-        <el-input v-model="loginForm.email"  placeholder="Enter admin email address">
+        <el-input v-model="loginForm.email" placeholder="Enter email address">
           <template #prefix>
             <email-icon />
           </template>
@@ -49,7 +46,9 @@ const rules = reactive<FormRules<LoginForm>>({
       </el-form-item>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
-        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm">Continue</el-button>
+        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
+          >Continue</el-button
+        >
       </div>
     </el-form>
   </main>
@@ -74,10 +73,9 @@ const rules = reactive<FormRules<LoginForm>>({
   padding: 0 0.75rem;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   :deep(.el-form-item__label) {
-  font-size: 0.75rem;
-
-}
+    font-size: 0.75rem;
+  }
 }
 </style>
