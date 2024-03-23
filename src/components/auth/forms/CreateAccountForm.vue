@@ -1,9 +1,14 @@
 <script setup lang="ts">
 // vue
 import { ref, reactive } from 'vue'
+
+import { useRouter } from 'vue-router'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
+// notification
+import { useNotification } from '@kyvg/vue3-notification'
 
+// icons
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
 
 // interface
@@ -11,16 +16,69 @@ interface CreateAccountForm {
   email: string
 }
 
+// composable
+const { notify } = useNotification()
+const router = useRouter()
+
 // refs
 const ruleFormRef = ref<FormInstance>()
+const hiddenInput = ref('')
+const isLoading = ref(false)
 
 // reactive
 const createAccountForm = reactive<CreateAccountForm>({
   email: ''
 })
 const rules = reactive<FormRules<CreateAccountForm>>({
-  email: [{ required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }]
+  email: [
+    { required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
+  ]
 })
+
+// functions
+const mockCreateAccountEndpoint = async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const mockResponse = {
+        status: 200,
+        data: {
+          message: 'Account created successfully',
+          accountId: '123456789'
+        }
+      }
+      Math.random() * 10 > 2 ? resolve(mockResponse) : reject()
+    }, 1000)
+  })
+}
+const createAccountEndpoint = async () => {
+  isLoading.value = true
+  await mockCreateAccountEndpoint()
+    .then(() => {
+      isLoading.value = false
+      router.push('/check-your-email')
+    })
+    .catch(() => {
+      notify({
+        title: 'Error',
+        type: 'error',
+        text: 'Something went wrong'
+      })
+    })
+}
+const validateForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid: any): any => {
+    if (valid) {
+      createAccountEndpoint()
+    } else {
+      notify({
+        title: 'Error',
+        type: 'error',
+        text: 'Please fill all inputs correctly'
+      })
+    }
+  })
+}
 </script>
 <template>
   <main class="w-full">
@@ -30,6 +88,7 @@ const rules = reactive<FormRules<CreateAccountForm>>({
       :model="createAccountForm"
       :rules="rules"
       label-position="top"
+      @keydown.enter="validateForm(ruleFormRef)"
     >
       <!-- password -->
       <el-form-item label="Email Address" prop="email">
@@ -38,11 +97,16 @@ const rules = reactive<FormRules<CreateAccountForm>>({
             <email-icon />
           </template>
         </el-input>
+        <el-input class="hidden" v-model="hiddenInput" />
       </el-form-item>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
-        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
-          >Continue</el-button
+        <el-button
+          class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
+          @click="validateForm(ruleFormRef)"
+          :loading="isLoading"
+          :disabled="isLoading"
+          >{{ isLoading ? 'Creating Account...' : 'Create Account' }}</el-button
         >
       </div>
     </el-form>

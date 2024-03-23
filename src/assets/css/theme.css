@@ -1,0 +1,308 @@
+:root {
+  /* background */
+  --background-surface: #ffffff;
+  --background-muted: #f7f0ff;
+  --background-subtle: #ffffff;
+  --background-canvas: #ffffff;
+
+  /* accent */
+  --accent-disabled: #b2b1b2;
+  --accent-default: #6903d3;
+  --accent-emphasis: #440192;
+  --accent-muted: #7e1aef;
+  --accent-subtle: #e9d9fc;
+
+  /* complement */
+  --complement-disabled: #ffebf5;
+  --complement-default: #fa0f85;
+  --complement-emphasis: #c80466;
+  --complement-muted: #fb3799;
+  --complement-subtle: #fed7eb;
+
+  /* foreground */
+  --foreground-default: #0a0015;
+  --foreground-muted: #77707f;
+  --foreground-subtle: #b1abb8;
+  --foreground-on-accent: #ffffff;
+  --foreground-on-disabled: #878090;
+  --foreground-disabled: #d1ced3;
+  --foreground-info: #545557;
+
+  /* warning */
+  --warning-foreground: #ffc12d;
+  --warning-emphasis: #ce9000;
+  --warning-muted: #ffce5c;
+  --warning-subtle: #fff9eb;
+  --warning-on-warning: #0c0c0c;
+
+  /* error */
+  --error-foreground: #f1203b;
+  --error-emphasis: #b8051c;
+  --error-muted: #fa4269;
+  --error-subtle: #ffe5eb;
+  --error-on-error: #ffffff;
+
+  /* info */
+  --info-foreground: #1890ff;
+  --info-emphasis: #0074e0;
+  --info-muted: #339cff;
+  --info-subtle: #ebf5ff;
+  --info-on-info: #ffffff;
+
+  /* success */
+  --success-foreground: #25b669;
+  --success-emphasis: #00813d;
+  --success-muted: #68ca96;
+  --success-subtle: #f0faf4;
+  --success-on-success: #ffffff;
+  --success-default: #11763d;
+
+  /* input */
+  --input-background: #ffffff;
+  --input-text: #130326;
+  --input-placeholder: #c2bec8;
+  --input-border-default: #e3dfe7;
+  --input-border-disabled: #f7f7f7;
+  --input-fg-disabled: #f1f1f1;
+  --input-border-error: #b8051c;
+
+  /* border */
+  --border-default: #e3dfe7;
+}
+
+/* declarations for background */
+.bg-surface {
+  background: var(--background-surface);
+}
+.bg-muted {
+  background: var(--background-muted);
+}
+.bg-subtle {
+  background: var(--background-subtle);
+}
+.bg-canvas {
+  background: var(--background-canvas);
+}
+.bg-accent-disabled {
+  background: var(--accent-disabled);
+}
+.bg-accent-default {
+  background: var(--accent-default);
+}
+.bg-accent-emphasis {
+  background: var(--accent-emphasis);
+}
+.bg-accent-muted {
+  background: var(--accent-muted);
+}
+.bg-accent-subtle {
+  background: var(--accent-subtle);
+}
+.bg-info-muted {
+  background: var(--info-muted);
+}
+.bg-info-emphasis {
+  background: var(--info-emphasis);
+}
+.bg-info-subtle {
+  background: var(--info-subtle);
+}
+.bg-info-on-info {
+  background: var(--info-on-info);
+}
+.bg-success-emphasis {
+  background: var(--success-emphasis);
+}
+.bg-success-muted {
+  background: var(--success-muted);
+}
+.bg-success-subtle {
+  background: var(--success-subtle);
+}
+.bg-success-on-success {
+  background: var(--success-on-success);
+}
+.bg-success-default {
+  background: var(--success-default);
+}
+.bg-input-background {
+  background: var(--input-background);
+}
+.bg-error-default {
+  background: var(--error-default);
+}
+.bg-error-emphasis {
+  background: var(--error-emphasis);
+}
+.bg-error-muted {
+  background: var(--error-muted);
+}
+.bg-error-subtle {
+  background: var(--error-subtle);
+}
+.bg-error-on-error {
+  background: var(--error-on-error);
+}
+.bg-complement {
+  background: var(--complement-subtle);
+}
+.bg-fg-disabled {
+  background: var(--foreground-disabled);
+}
+
+/*  declarations for foreground */
+.fg-default {
+  background: var(--foreground-default);
+}
+.fg-muted {
+  background: var(--foreground-muted);
+}
+.fg-subtle {
+  background: var(--foreground-subtle);
+}
+.fg-on-accent {
+  background: var(--foreground-on-accent);
+}
+.fg-on-disabled {
+  background: var(--foreground-on-disabled);
+}
+.fg-disabled {
+  background: var(--foreground-disabled);
+}
+.fg-info {
+  background: var(--info-foreground);
+}
+.fg-success {
+  background: var(--success-foreground);
+}
+
+/* declarations for text colors */
+.text-accent-disabled {
+  color: var(--accent-disabled);
+}
+.text-accent-default {
+  color: var(--accent-default);
+}
+.text-accent-emphasis {
+  color: var(--accent-emphasis);
+}
+.text-accent-muted {
+  color: var(--accent-muted);
+}
+.text-accent-subtle {
+  color: var(--accent-subtle);
+}
+.text-fg-default {
+  color: var(--foreground-default);
+}
+.text-fg-muted {
+  color: var(--foreground-muted);
+}
+.text-fg-subtle {
+  color: var(--foreground-subtle);
+}
+.text-fg-on-accent {
+  color: var(--foreground-on-accent);
+}
+.text-fg-on-disabled {
+  color: var(--foreground-on-disabled);
+}
+.text-fg-disabled {
+  color: var(--foreground-disabled);
+}
+.text-error-emphasis {
+  color: var(--error-emphasis);
+}
+.text-error-muted {
+  color: var(--error-muted);
+}
+.text-error-subtle {
+  color: var(--error-subtle);
+}
+.text-error-on-error {
+  color: var(--error-on-error);
+}
+.text-info-emphasis {
+  color: var(--info-emphasis);
+}
+.text-info-subtle {
+  color: var(--info-subtle);
+}
+.text-info-on-info {
+  color: var(--info-on-info);
+}
+.text-muted {
+  color: var(--info-muted);
+}
+.text-success-emphasis {
+  color: var(--success-emphasis);
+}
+.text-success-muted {
+  color: var(--success-muted);
+}
+.text-success-on-success {
+  color: var(--success-on-success);
+}
+.text-success-default {
+  color: var(--success-default);
+}
+.text-complement-emphasis {
+  color: var(--complement-emphasis);
+}
+.text-error-emphasis {
+  color: var(--error-emphasis);
+}
+.text-error-foreground {
+  color: var(--error-foreground);
+}
+/*  declaration for border colors */
+.border-fg-disabled {
+  border: 1px solid var(--foreground-disabled);
+}
+.border-fg-muted {
+  border: 1px solid var(--foreground-muted);
+}
+.border-success-default {
+  border: 1px solid var(--success-default);
+}
+.border-error-emphasis {
+  border: 1px solid var(--error-emphasis);
+}
+.border-warning-emphasis {
+  border: 1px solid var(--warning-emphasis);
+}
+.border-bottom-success-default {
+  border-bottom: 4px solid var(--success-default);
+}
+.border-bottom-error-emphasis {
+  border-bottom: 4px solid var(--error-emphasis);
+}
+.border-complement-muted {
+  border: 1px solid var(--complement-muted);
+}
+.border-accent-default {
+  border: 1px solid var(--accent-default);
+}
+.border-accent-muted {
+  border: 1px solid var(--accent-muted);
+}
+.border-success-default {
+  border: 1px solid var(--success-default);
+}
+.border-fg-on-disabled {
+  border: 1px solid var(--foreground-on-disabled);
+}
+.border-accent-emphasis {
+  border: 1px solid var(--accent-emphasis) !important;
+}
+.border-fg-subtle {
+  border: 1px solid var(--foreground-subtle) !important;
+}
+
+/* input */
+.input-border-default {
+  border: 1px solid var(--border-default);
+}
+.input-border-error {
+  border: 1px solid var(--input-border-error);
+}
