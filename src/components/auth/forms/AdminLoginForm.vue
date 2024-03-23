@@ -22,7 +22,6 @@ const ruleFormRef = ref<FormInstance>()
 
 // reactive
 const loginForm = reactive<LoginForm>({
-
   code: ''
 })
 const rules = reactive<FormRules<LoginForm>>({
@@ -46,7 +45,7 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
     >
       <!-- password -->
       <el-form-item label="Code" prop="code">
-        <el-input v-model="loginForm.email" type="password" show-password  placeholder="Enter admin code">
+        <el-input v-model="loginForm.code" type="password" show-password  placeholder="Enter admin code">
           <template #prefix>
             <password-icon />
           </template>
