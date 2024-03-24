@@ -1,11 +1,7 @@
 <script setup lang="ts">
 // components
 import CreateAccount from '@/components/auth/layouts/create-account/index.vue'
-import ScholarComponent from '@/components/auth/layouts/scholar-component/index.vue'
 </script>
 <template>
-  <main class="main min-h-screen">
-    <scholar-component />
-    <create-account />
-  </main>
+  <create-account />
 </template>

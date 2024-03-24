@@ -9,7 +9,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { useNotification } from '@kyvg/vue3-notification'
 
 // icons
-import EmailIcon from '@/assets/icons/EmailIcon.vue'
+import EmailIcon from '@/assets/icons/EmailIcon.vue' 
 
 // interface
 interface CreateAccountForm {
@@ -58,6 +58,7 @@ const createAccountEndpoint = async () => {
       router.push('/check-your-email')
     })
     .catch(() => {
+      isLoading.value = false
       notify({
         title: 'Error',
         type: 'error',
@@ -102,7 +103,7 @@ const validateForm = async (formEl: FormInstance | undefined) => {
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
         <el-button
-          class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
+          class="bg-primary text-white w-40 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
           @click="validateForm(ruleFormRef)"
           :loading="isLoading"
           :disabled="isLoading"
