@@ -48,6 +48,12 @@ const router = createRouter({
           name: 'Check Your Email',
           component: () => import('@/views/auth/CheckYourEmail.vue'),
           meta: { title: `Web-Based Past Projects - Check Your Email` }
+        },
+        {
+          path: '/forgot-password',
+          name: 'Forgot Password',
+          component: () => import('@/views/auth/ForgotPassword.vue'),
+          meta: { title: `Web-Based Past Projects - Forgot Password` }
         }
       ]
     }

@@ -72,7 +72,11 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
         <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">
           Login as Admin?
         </p>
-        <p class="text-xs font-medium underline text-primary cursor-pointer">Forgot Password?</p>
+        <router-link
+          to="/forgot-password"
+          class="text-xs font-medium underline text-primary cursor-pointer"
+          >Forgot Password?</router-link
+        >
       </div>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">

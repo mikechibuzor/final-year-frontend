@@ -12,7 +12,7 @@ import { useNotification } from '@kyvg/vue3-notification'
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
 
 // interface
-interface CreateAccountForm {
+interface ForgotPasswordForm {
   email: string
 }
 
@@ -26,17 +26,17 @@ const hiddenInput = ref('')
 const isLoading = ref(false)
 
 // reactive
-const createAccountForm = reactive<CreateAccountForm>({
+const forgotPasswordForm = reactive<ForgotPasswordForm>({
   email: ''
 })
-const rules = reactive<FormRules<CreateAccountForm>>({
+const rules = reactive<FormRules<ForgotPasswordForm>>({
   email: [
     { required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
   ]
 })
 
 // functions
-const mockCreateAccountEndpoint = async () => {
+const mockForgotPasswordEndpoint = async () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const mockResponse = {
@@ -52,10 +52,10 @@ const mockCreateAccountEndpoint = async () => {
 }
 const createAccountEndpoint = async () => {
   isLoading.value = true
-  await mockCreateAccountEndpoint()
+  await mockForgotPasswordEndpoint()
     .then(() => {
       isLoading.value = false
-      router.push('/check-your-email?type=create-account')
+      router.push('/check-your-email?type=forgot-password')
     })
     .catch(() => {
       isLoading.value = false
@@ -86,20 +86,24 @@ const validateForm = async (formEl: FormInstance | undefined) => {
     <el-form
       hide-required-asterisk
       ref="ruleFormRef"
-      :model="createAccountForm"
+      :model="forgotPasswordForm"
       :rules="rules"
       label-position="top"
       @keydown.enter="validateForm(ruleFormRef)"
     >
       <!-- password -->
       <el-form-item label="Email Address" prop="email">
-        <el-input v-model="createAccountForm.email" placeholder="Enter email address">
+        <el-input v-model="forgotPasswordForm.email" placeholder="Enter email address">
           <template #prefix>
             <email-icon />
           </template>
         </el-input>
         <el-input class="hidden" v-model="hiddenInput" />
       </el-form-item>
+      <!-- login as user -->
+      <router-link to="/login" class="text-xs font-medium underline cursor-pointer">
+        Login as User?
+      </router-link>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
         <el-button
@@ -107,7 +111,7 @@ const validateForm = async (formEl: FormInstance | undefined) => {
           @click="validateForm(ruleFormRef)"
           :loading="isLoading"
           :disabled="isLoading"
-          >{{ isLoading ? 'Creating Account...' : 'Create Account' }}</el-button
+          >{{ isLoading ? 'Sending...' : 'Continue' }}</el-button
         >
       </div>
     </el-form>
