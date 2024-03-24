@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-
+import './element-variable.scss'
 import './assets/css/main.css'
 import Notifications from '@kyvg/vue3-notification'
 
