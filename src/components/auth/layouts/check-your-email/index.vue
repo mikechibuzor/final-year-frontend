@@ -1,29 +1,35 @@
 <script setup lang="ts">
-// vue
-import { ref } from 'vue'
 // icons
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
 
-// notification
-import { useNotification } from '@kyvg/vue3-notification'
+// handle error composable
+import { useHandleError } from '@/composables/useHandleError'
+
+import { useAuthStore } from '@/store/auth.store'
 
 // composable
-const { notify } = useNotification()
-
-// refs
-const isLoading = ref(false)
+const { getResendLinkEmail, resendAccountVerificationLink } = useAuthStore()
+const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
 
 // functions
 const handleResendLink = () => {
   isLoading.value = true
-  setTimeout(() => {
-    isLoading.value = false
-    notify({
-      title: 'Success',
-      type: 'success',
-      text: 'Link has been re-sent to your mail!'
+  const payload = {
+    email: getResendLinkEmail,
+    type: 'create-account'
+  }
+  resendAccountVerificationLink(payload)
+    .then(() => {
+      isLoading.value = false
+      notify({
+        title: 'Success',
+        type: 'success',
+        text: 'Link has been re-sent to your mail!'
+      })
     })
-  }, 1000)
+    .catch((error) => {
+      handleErrorResponseNotification(error)
+    })
 }
 </script>
 <template>
@@ -37,6 +43,7 @@ const handleResendLink = () => {
     </p>
     <el-button
       @click="handleResendLink"
+      :disabled="isLoading"
       class="bg-primary text-xs lg:text-base text-white w-[13rem] lg:w-[20rem] mt-10 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
       >{{ isLoading ? 'Resending...' : 'Resend Link' }}</el-button
     >

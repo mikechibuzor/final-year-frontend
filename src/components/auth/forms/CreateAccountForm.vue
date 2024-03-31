@@ -8,6 +8,13 @@ import type { FormInstance, FormRules } from 'element-plus'
 // notification
 import { useNotification } from '@kyvg/vue3-notification'
 
+import { useAuthStore } from '@/store/auth.store'
+import { useHandleError } from '@/composables/useHandleError'
+
+// composable
+const { handleErrorResponseNotification, isLoading } = useHandleError()
+const { createAccount, setResentLinkEmail } = useAuthStore()
+
 // icons
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
 
@@ -23,7 +30,6 @@ const router = useRouter()
 // refs
 const ruleFormRef = ref<FormInstance>()
 const hiddenInput = ref('')
-const isLoading = ref(false)
 
 // reactive
 const createAccountForm = reactive<CreateAccountForm>({
@@ -34,36 +40,16 @@ const rules = reactive<FormRules<CreateAccountForm>>({
     { required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
   ]
 })
-
-// functions
-const mockCreateAccountEndpoint = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const mockResponse = {
-        status: 200,
-        data: {
-          message: 'Account created successfully',
-          accountId: '123456789'
-        }
-      }
-      Math.random() * 10 > 2 ? resolve(mockResponse) : reject()
-    }, 1000)
-  })
-}
 const createAccountEndpoint = async () => {
   isLoading.value = true
-  await mockCreateAccountEndpoint()
+  await createAccount(createAccountForm)
     .then(() => {
       isLoading.value = false
+      setResentLinkEmail(createAccountForm.email)
       router.push('/check-your-email?type=create-account')
     })
-    .catch(() => {
-      isLoading.value = false
-      notify({
-        title: 'Error',
-        type: 'error',
-        text: 'Something went wrong'
-      })
+    .catch((error) => {
+      handleErrorResponseNotification(error)
     })
 }
 const validateForm = async (formEl: FormInstance | undefined) => {

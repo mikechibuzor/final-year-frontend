@@ -55,6 +55,18 @@ const router = createRouter({
           name: 'Forgot Password',
           component: () => import('@/views/auth/ForgotPassword.vue'),
           meta: { title: `Web-Based Past Projects - Forgot Password` }
+        },
+        {
+          path: '/verify-email',
+          name: 'Verify Email',
+          component: () => import('@/views/auth/VerifyEmail.vue'),
+          meta: { title: `Web-Based Past Projects - Verify Email` }
+        },
+        {
+          path: '/set-password',
+          name: 'Set Password',
+          component: () => import('@/views/auth/SetPassword.vue'),
+          meta: { title: `Web-Based Past Projects - Set Password` }
         }
       ]
     }
