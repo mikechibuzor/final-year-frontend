@@ -1,4 +1,112 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue'
+// components
+import TheHeader from '@/components/app/home-page/layouts/TheHeader.vue'
+import SearchBar from '@/components/app/home-page/layouts/SearchBar.vue'
+import ProjectCard from '@/components/app/home-page/layouts/ProjectCard.vue'
+
+interface ProjectDetails {
+  author: string
+  title: string
+  supervisor: string
+  year: string
+}
+
+// computed
+const allProjects = computed<ProjectDetails[]>(() => [
+  {
+    author: 'Iwuagwu Chibuzor Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. 0. Adeleke',
+    year: '2024'
+  },
+  {
+    author: 'Hassan Jolaoluwa Batin',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. K.J',
+    year: '2024'
+  },
+  {
+    author: 'Olawole Akindele Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2024'
+  },
+  {
+    author: 'Iwuagwu Chibuzor Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. 0. Adeleke',
+    year: '2024'
+  },
+  {
+    author: 'Hassan Jolaoluwa Batin',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. K.J',
+    year: '2024'
+  },
+  {
+    author: 'Olawole Akindele Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2024'
+  },
+  {
+    author: 'Iwuagwu Chibuzor Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. 0. Adeleke',
+    year: '2024'
+  },
+  {
+    author: 'Hassan Jolaoluwa Batin',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. K.J',
+    year: '2024'
+  },
+  {
+    author: 'Olawole Akindele Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2024'
+  },
+  {
+    author: 'Iwuagwu Chibuzor Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. 0. Adeleke',
+    year: '2024'
+  },
+  {
+    author: 'Hassan Jolaoluwa Batin',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. K.J',
+    year: '2024'
+  },
+  {
+    author: 'Olawole Akindele Michael',
+    title: 'Development of a Web-Based Past Projects Repository',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2024'
+  }
+])
+</script>
+
 <template>
-  <main>Hello, world!</main>
+  <main class="p-4 lg:p-8">
+    <!-- header -->
+    <the-header />
+    <!-- search bar -->
+    <search-bar />
+    <!-- projects -->
+    <section class="grid gap-12 lg:grid-cols-3 items-center justify-center px-8 lg:px-48 mt-20">
+      <project-card v-for="(details, index) in allProjects" :key="index" :details="details" />
+    </section>
+    <!-- pagination -->
+    <section class="flex items-center justify-center mt-10 lg:px-48">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="allProjects.length"
+        current-change="handleCurrentChange"
+      />
+    </section>
+  </main>
 </template>

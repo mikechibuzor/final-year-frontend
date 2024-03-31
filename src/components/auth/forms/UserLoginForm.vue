@@ -1,8 +1,12 @@
 <script setup lang="ts">
 // vue
 import { ref, reactive } from 'vue'
+// vue router
+import { useRouter } from 'vue-router'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
+// notification
+import { useNotification } from '@kyvg/vue3-notification'
 
 //icons
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
@@ -13,7 +17,9 @@ interface LoginForm {
   email: string
   password: string
 }
-
+// composable
+const { notify } = useNotification()
+const router = useRouter()
 // emits
 const emit = defineEmits<{
   (e: 'toggleLoginForm', index: number): void
@@ -21,6 +27,7 @@ const emit = defineEmits<{
 
 // refs
 const ruleFormRef = ref<FormInstance>()
+const isLoading = ref(false)
 
 // reactive
 const loginForm = reactive<LoginForm>({
@@ -36,6 +43,51 @@ const rules = reactive<FormRules<LoginForm>>({
 
 // functions
 const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
+const mockLoginEndpoint = async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const mockResponse = {
+        status: 200,
+        data: {
+          message: 'Account created successfully',
+          accountId: '123456789'
+        }
+      }
+      Math.random() * 10 > 2 ? resolve(mockResponse) : reject()
+    }, 1000)
+  })
+}
+const loginEndpoint = async () => {
+  isLoading.value = true
+  await mockLoginEndpoint()
+    .then(() => {
+      isLoading.value = false
+      localStorage.setItem('token', 'mock token')
+      router.push('/home')
+    })
+    .catch(() => {
+      isLoading.value = false
+      notify({
+        title: 'Error',
+        type: 'error',
+        text: 'Something went wrong'
+      })
+    })
+}
+const validateForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid: any): any => {
+    if (valid) {
+      loginEndpoint()
+    } else {
+      notify({
+        title: 'Error',
+        type: 'error',
+        text: 'Please fill all inputs correctly'
+      })
+    }
+  })
+}
 </script>
 <template>
   <main class="w-full">
@@ -45,6 +97,7 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
       :model="loginForm"
       :rules="rules"
       label-position="top"
+      @keydown.enter="validateForm(ruleFormRef)"
     >
       <!-- email -->
       <el-form-item label="Email Address" prop="email">
@@ -80,8 +133,13 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
       </div>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
-        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm">
-          Login
+        <el-button
+          @click="validateForm(ruleFormRef)"
+          :loading="isLoading"
+          :disabled="isLoading"
+          class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
+        >
+          {{ isLoading ? 'Logging in...' : 'Login' }}
         </el-button>
       </div>
     </el-form>

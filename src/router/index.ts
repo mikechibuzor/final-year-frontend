@@ -10,6 +10,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: '/home',
       component: () => import(`@/views/app/index.vue`),
       beforeEnter: guardAppRoutes,
       children: [
