@@ -12,7 +12,7 @@ interface ProjectDetails {
   year: string
 }
 
-// computed
+// computed properties
 const allProjects = computed<ProjectDetails[]>(() => [
   {
     author: 'Iwuagwu Chibuzor Michael',
@@ -33,6 +33,13 @@ const allProjects = computed<ProjectDetails[]>(() => [
     year: '2024'
   },
   {
+    author: 'Adeosun Oluwatunmise',
+    title:
+      'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2023'
+  },
+  {
     author: 'Iwuagwu Chibuzor Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
@@ -51,6 +58,13 @@ const allProjects = computed<ProjectDetails[]>(() => [
     year: '2024'
   },
   {
+    author: 'Adeosun Oluwatunmise',
+    title:
+      'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2023'
+  },
+  {
     author: 'Iwuagwu Chibuzor Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
@@ -69,6 +83,13 @@ const allProjects = computed<ProjectDetails[]>(() => [
     year: '2024'
   },
   {
+    author: 'Adeosun Oluwatunmise',
+    title:
+      'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2023'
+  },
+  {
     author: 'Iwuagwu Chibuzor Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
@@ -85,8 +106,20 @@ const allProjects = computed<ProjectDetails[]>(() => [
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024'
+  },
+  {
+    author: 'Adeosun Oluwatunmise',
+    title:
+      'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
+    supervisor: 'Dr. Aderonke Sakpere',
+    year: '2023'
   }
 ])
+
+// functions
+const handleCurrentChange = (page: number) => {
+  console.log(page)
+}
 </script>
 
 <template>
@@ -105,7 +138,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
         background
         layout="prev, pager, next"
         :total="allProjects.length"
-        current-change="handleCurrentChange"
+        @current-change="handleCurrentChange"
       />
     </section>
   </main>

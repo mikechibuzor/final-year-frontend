@@ -12,7 +12,7 @@ const props = defineProps({
     <!-- image -->
     <div class="h-48 w-32 bg-primary rounded-sm shadow-sm mx-auto"></div>
     <!-- title -->
-    <p class="text-center font-semibold mt-4">
+    <p class="text-center font-semibold mt-4 h-20 overflow-hidden overflow-ellipsis">
       {{ props.details.title }}
     </p>
     <!-- author -->
