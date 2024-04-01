@@ -118,7 +118,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
 
 // functions
 const handleCurrentChange = (page: number) => {
-  console.log(page)
+  return page
 }
 </script>
 

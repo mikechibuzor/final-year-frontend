@@ -19,7 +19,6 @@ const { verifyEmail, setExtractedEmailVerificationId } = useAuthStore()
 const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
 
 const verifyEmailHandler = () => {
-  console.log(route)
   isLoading.value = true
   if (!route.query.code || !route.query.code) {
     router.push('/create-account')

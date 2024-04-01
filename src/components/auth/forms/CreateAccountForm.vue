@@ -45,7 +45,6 @@ const createAccountEndpoint = async () => {
   await createAccount(createAccountForm)
     .then(() => {
       isLoading.value = false
-      console.log('got here', createAccountForm.email)
       setResentLinkEmail(createAccountForm.email)
       router.push('/check-your-email?type=create-account')
     })
