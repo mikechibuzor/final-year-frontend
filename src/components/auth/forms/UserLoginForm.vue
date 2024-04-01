@@ -5,12 +5,13 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
-// notification
-import { useNotification } from '@kyvg/vue3-notification'
 
 //icons
 import EmailIcon from '@/assets/icons/EmailIcon.vue'
 import PasswordIcon from '@/assets/icons/PasswordIcon.vue'
+
+import { useAuthStore } from '@/store/auth.store'
+import { useHandleError } from '@/composables/useHandleError'
 
 // interface
 interface LoginForm {
@@ -18,8 +19,9 @@ interface LoginForm {
   password: string
 }
 // composable
-const { notify } = useNotification()
 const router = useRouter()
+const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
+const { login } = useAuthStore()
 // emits
 const emit = defineEmits<{
   (e: 'toggleLoginForm', index: number): void
@@ -27,7 +29,6 @@ const emit = defineEmits<{
 
 // refs
 const ruleFormRef = ref<FormInstance>()
-const isLoading = ref(false)
 
 // reactive
 const loginForm = reactive<LoginForm>({
@@ -43,35 +44,15 @@ const rules = reactive<FormRules<LoginForm>>({
 
 // functions
 const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
-const mockLoginEndpoint = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const mockResponse = {
-        status: 200,
-        data: {
-          message: 'Account created successfully',
-          accountId: '123456789'
-        }
-      }
-      Math.random() * 10 > 2 ? resolve(mockResponse) : reject()
-    }, 1000)
-  })
-}
 const loginEndpoint = async () => {
   isLoading.value = true
-  await mockLoginEndpoint()
+  await login(loginForm)
     .then(() => {
       isLoading.value = false
-      localStorage.setItem('token', 'mock token')
       router.push('/home')
     })
-    .catch(() => {
-      isLoading.value = false
-      notify({
-        title: 'Error',
-        type: 'error',
-        text: 'Something went wrong'
-      })
+    .catch((error) => {
+      handleErrorResponseNotification(error)
     })
 }
 const validateForm = async (formEl: FormInstance | undefined) => {

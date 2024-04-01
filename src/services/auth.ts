@@ -42,3 +42,13 @@ export async function setPasswordService(payload: SetPasswordPayload) {
   })
   return res
 }
+export interface LoginPayload{
+  email: string
+  password: string
+}
+export async function loginService(payload: LoginPayload) {
+  const res = await axios.post(`${baseUrlAuth}/login`, {
+    ...payload
+  })
+  return res
+}

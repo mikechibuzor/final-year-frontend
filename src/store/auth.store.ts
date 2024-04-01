@@ -8,7 +8,9 @@ import {
   verifyEmailService,
   type VerifyEmailPayload,
   setPasswordService,
-  type SetPasswordPayload
+  type SetPasswordPayload,
+  loginService,
+  type LoginPayload
 } from '@/services/auth'
 
 export const useAuthStore = defineStore('counter', () => {
@@ -21,7 +23,9 @@ export const useAuthStore = defineStore('counter', () => {
           count: 0,
           userDetails: {},
           resendLinkEmail: '',
-          extractedEmailVerificationId: ''
+          extractedEmailVerificationId: '',
+          accessToken: '',
+          refreshToke: ''
         }
   }
 
@@ -59,6 +63,14 @@ export const useAuthStore = defineStore('counter', () => {
   const setExtractedEmailVerificationId = (payload: string) =>
     (state.value.extractedEmailVerificationId = payload)
 
+  const login = async (payload: LoginPayload) => {
+    const response = await loginService(payload)
+    state.value.accessToken = response.data.accessToken
+    state.value.refreshToken = response.data.refreshToken
+    // state.value.userDetails = response.data.data
+    localStorage.setItem('token', state.value.accessToken)
+  }
+
   watch(
     () => state,
     () => {
@@ -79,6 +91,7 @@ export const useAuthStore = defineStore('counter', () => {
     verifyEmail,
     setPassword,
     getExtractedEmailVerificationId,
-    setExtractedEmailVerificationId
+    setExtractedEmailVerificationId,
+    login
   }
 })
