@@ -1,30 +1,29 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 import {
   createAccountService,
+  type CreateAccountDetails,
   resendAccountVerificationLinkService,
-  verifyEmailService
+  type ResentAccountVerificationPayload,
+  verifyEmailService,
+  type VerifyEmailPayload,
+  setPasswordService,
+  type SetPasswordPayload
 } from '@/services/auth'
 
-interface CreateAccountDetails {
-  email: string
-}
-interface ResentAccountVerificationPayload {
-  email: string
-  type: string
-}
-interface VerifyEmailPayload {
-  code: string
-  id: string
-}
 export const useAuthStore = defineStore('counter', () => {
   // default state
   const getDefaultState = () => {
-    return {
-      count: 0,
-      userDetails: {},
-      resendLinkEmail: ''
-    }
+    const savedState = localStorage.getItem('authState')
+    console.log(JSON.parse(savedState), 'saved')
+    return savedState
+      ? JSON.parse(savedState)
+      : {
+          count: 0,
+          userDetails: {},
+          resendLinkEmail: '',
+          extractedEmailVerificationId: ''
+        }
   }
 
   // refs
@@ -34,6 +33,7 @@ export const useAuthStore = defineStore('counter', () => {
   const doubleCount = computed(() => state.value.count * 2)
   const getUserDetails = computed(() => state.value.userDetails)
   const getResendLinkEmail = computed(() => state.value.resendLinkEmail)
+  const getExtractedEmailVerificationId = computed(() => state.value.extractedEmailVerificationId)
 
   // functions
   const incrementCount = () => {
@@ -46,6 +46,7 @@ export const useAuthStore = defineStore('counter', () => {
     return createAccountService(payload)
   }
   const setResentLinkEmail = (payload: string) => {
+    console.log(state, payload)
     state.value.resendLinkEmail = payload
   }
   const resendAccountVerificationLink = (payload: ResentAccountVerificationPayload) => {
@@ -54,7 +55,20 @@ export const useAuthStore = defineStore('counter', () => {
   const verifyEmail = (payload: VerifyEmailPayload) => {
     return verifyEmailService(payload)
   }
+  const setPassword = (payload: SetPasswordPayload) => {
+    return setPasswordService(payload)
+  }
+  const setExtractedEmailVerificationId = (payload: string) =>
+    (state.value.extractedEmailVerificationId = payload)
 
+  watch(
+    () => state,
+    () => {
+      console.log(JSON.stringify(state.value))
+      localStorage.setItem('authState', JSON.stringify(state.value))
+    },
+    { deep: true }
+  )
   return {
     state,
     doubleCount,
@@ -65,6 +79,9 @@ export const useAuthStore = defineStore('counter', () => {
     getResendLinkEmail,
     setResentLinkEmail,
     resendAccountVerificationLink,
-    verifyEmail
+    verifyEmail,
+    setPassword,
+    getExtractedEmailVerificationId,
+    setExtractedEmailVerificationId
   }
 })

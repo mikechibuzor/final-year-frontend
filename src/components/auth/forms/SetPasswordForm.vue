@@ -5,80 +5,96 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
-// notification
-import { useNotification } from '@kyvg/vue3-notification'
 
 //icons
-import EmailIcon from '@/assets/icons/EmailIcon.vue'
 import PasswordIcon from '@/assets/icons/PasswordIcon.vue'
 
+import { useAuthStore } from '@/store/auth.store'
+import { useHandleError } from '@/composables/useHandleError'
+
+// composable
+const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
+const { setPassword, getExtractedEmailVerificationId } = useAuthStore()
+
 // interface
-interface LoginForm {
-  email: string
+interface SetPasswordForm {
   password: string
+  confirmPassword: string
 }
 // composable
-const { notify } = useNotification()
 const router = useRouter()
-// emits
-const emit = defineEmits<{
-  (e: 'toggleLoginForm', index: number): void
-}>()
 
 // refs
 const ruleFormRef = ref<FormInstance>()
-const isLoading = ref(false)
+const hiddenInput = ref('')
 
 // reactive
-const loginForm = reactive<LoginForm>({
-  email: '',
+const setPasswordForm = reactive<SetPasswordForm>({
+  confirmPassword: '',
   password: ''
-})
-const rules = reactive<FormRules<LoginForm>>({
-  email: [
-    { required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
-  ],
-  password: [{ required: true, message: 'Please enter your password', trigger: ['blur', 'change'] }]
 })
 
 // functions
-const handleToggleLoginForm = () => emit('toggleLoginForm', 1)
-const mockLoginEndpoint = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const mockResponse = {
-        status: 200,
-        data: {
-          message: 'Account created successfully',
-          accountId: '123456789'
-        }
-      }
-      Math.random() * 10 > 2 ? resolve(mockResponse) : reject()
-    }, 1000)
-  })
+const validatePasswordRequirement = (): void => {
+  // Check if the password is at least 8 characters long
+  setPasswordForm.password.length < 8
+    ? (passwordRequirements[0].validity = false)
+    : (passwordRequirements[0].validity = true)
+  // Check if the password contains at least one uppercase letter (A-Z)
+  !/[A-Z]/.test(setPasswordForm.password)
+    ? (passwordRequirements[1].validity = false)
+    : (passwordRequirements[1].validity = true)
+  // Check if the password contains at least one lowercase letter (a-z)
+  !/[a-z]/.test(setPasswordForm.password)
+    ? (passwordRequirements[2].validity = false)
+    : (passwordRequirements[2].validity = true)
+  // Check if the password contains at least one special character
+  // eslint-disable-next-line no-useless-escape
+  !/[!@#\$%^&*(),.?":{}|<>]/.test(setPasswordForm.password)
+    ? (passwordRequirements[3].validity = false)
+    : (passwordRequirements[3].validity = true)
+  // Check if the password contains at least one digit (0-9)
+  !/\d/.test(setPasswordForm.password)
+    ? (passwordRequirements[4].validity = false)
+    : (passwordRequirements[4].validity = true)
 }
-const loginEndpoint = async () => {
+
+const validatePasswordHandler = (rule: any, value: any, callback: any): void => {
+  // check all conditions
+  let allPasswordRequirements = 0
+  passwordRequirements.forEach((requirements) => {
+    if (requirements.validity) {
+      allPasswordRequirements += 1
+    }
+  })
+  if (allPasswordRequirements >= 5) {
+    callback()
+  } else {
+    callback(new Error('Password is Invalid!'))
+  }
+}
+
+const setPasswordHandler = async () => {
   isLoading.value = true
-  await mockLoginEndpoint()
+  const payload = {
+    id: getExtractedEmailVerificationId,
+    password: setPasswordForm.password
+  }
+  await setPassword(payload)
     .then(() => {
       isLoading.value = false
-      localStorage.setItem('token', 'mock token')
-      router.push('/home')
+      router.push('/login')
     })
-    .catch(() => {
+    .catch((error) => {
       isLoading.value = false
-      notify({
-        title: 'Error',
-        type: 'error',
-        text: 'Something went wrong'
-      })
+      handleErrorResponseNotification(error)
     })
 }
 const validateForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid: any): any => {
     if (valid) {
-      loginEndpoint()
+      setPasswordHandler()
     } else {
       notify({
         title: 'Error',
@@ -88,47 +104,82 @@ const validateForm = async (formEl: FormInstance | undefined) => {
     }
   })
 }
+const rules = reactive<FormRules>({
+  confirmPassword: [
+    { required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
+  ],
+  password: [{ validator: validatePasswordHandler, trigger: ['blur', 'change'], required: true }]
+})
+const passwordRequirements = reactive([
+  {
+    name: '8 Characters',
+    validity: false
+  },
+  {
+    name: 'An Uppercase Letter',
+    validity: false
+  },
+  {
+    name: 'A Lowercase Letter',
+    validity: false
+  },
+  {
+    name: 'A Special Character',
+    validity: false
+  },
+  {
+    name: 'A Number',
+    validity: false
+  }
+])
 </script>
 <template>
   <main class="w-full">
     <el-form
       hide-required-asterisk
       ref="ruleFormRef"
-      :model="loginForm"
+      :model="setPasswordForm"
       :rules="rules"
       label-position="top"
       @keydown.enter="validateForm(ruleFormRef)"
     >
-      <!-- email -->
-      <el-form-item label="Email Address" prop="email">
-        <el-input v-model="loginForm.email" placeholder="Enter your email address">
-          <template #prefix>
-            <email-icon />
-          </template>
-        </el-input>
-      </el-form-item>
       <!-- password -->
       <el-form-item label="Password" prop="password">
         <el-input
-          v-model="loginForm.password"
+          v-model="setPasswordForm.password"
           type="password"
           show-password
-          placeholder="Enter your password"
+          @input="validatePasswordRequirement"
+          placeholder="Enter a new password"
         >
           <template #prefix>
             <password-icon />
           </template>
         </el-input>
+        <el-input v-model="hiddenInput" class="hidden" />
       </el-form-item>
-      <!-- login as admin -->
+      <!-- confirm password -->
+      <div v-if="setPasswordForm.password">
+        <p class="text-black font-light text-xs lg:text-sm mt-3">At least</p>
+        <div class="flex items-center gap-x-2 gap-y-1.5 flex-wrap my-2">
+          <p
+            v-for="(passwordRequirement, index) in passwordRequirements"
+            :key="index"
+            class="text-[11px] border-primary border text-gray-300 font-light rounded-full px-2 py-1.5 transition-all duration-300 ease-in flex"
+            :class="
+              passwordRequirement.validity
+                ? 'bg-primary text-white border-secondary'
+                : 'border-gray-300'
+            "
+          >
+            <check-icon v-if="passwordRequirement.validity" />
+            <span>{{ passwordRequirement.name }}</span>
+          </p>
+        </div>
+      </div>
       <div class="flex items-center justify-between">
-        <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">
-          Login as Admin?
-        </p>
-        <router-link
-          to="/forgot-password"
-          class="text-xs font-medium underline text-primary cursor-pointer"
-          >Forgot Password?</router-link
+        <router-link to="/login" class="text-xs font-medium underline text-primary cursor-pointer"
+          >Remember password? Login</router-link
         >
       </div>
       <!-- login button -->

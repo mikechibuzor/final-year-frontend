@@ -15,7 +15,7 @@ import { useHandleError } from '@/composables/useHandleError'
 import { useAuthStore } from '@/store/auth.store'
 
 // composable
-const { verifyEmail } = useAuthStore()
+const { verifyEmail, setExtractedEmailVerificationId } = useAuthStore()
 const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
 
 const verifyEmailHandler = () => {
@@ -32,6 +32,7 @@ const verifyEmailHandler = () => {
   verifyEmail(payload)
     .then(() => {
       isLoading.value = false
+      setExtractedEmailVerificationId(payload.id)
       notify({
         title: 'Success',
         type: 'success',
