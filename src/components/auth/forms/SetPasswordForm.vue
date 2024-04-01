@@ -83,6 +83,11 @@ const setPasswordHandler = async () => {
   await setPassword(payload)
     .then(() => {
       isLoading.value = false
+      notify({
+        title: 'Success',
+        type: 'success',
+        text: 'Password set successfully!'
+      })
       router.push('/login')
     })
     .catch((error) => {

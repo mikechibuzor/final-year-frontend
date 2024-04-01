@@ -15,7 +15,6 @@ export const useAuthStore = defineStore('counter', () => {
   // default state
   const getDefaultState = () => {
     const savedState = localStorage.getItem('authState')
-    console.log(JSON.parse(savedState), 'saved')
     return savedState
       ? JSON.parse(savedState)
       : {
@@ -46,7 +45,6 @@ export const useAuthStore = defineStore('counter', () => {
     return createAccountService(payload)
   }
   const setResentLinkEmail = (payload: string) => {
-    console.log(state, payload)
     state.value.resendLinkEmail = payload
   }
   const resendAccountVerificationLink = (payload: ResentAccountVerificationPayload) => {
@@ -64,7 +62,6 @@ export const useAuthStore = defineStore('counter', () => {
   watch(
     () => state,
     () => {
-      console.log(JSON.stringify(state.value))
       localStorage.setItem('authState', JSON.stringify(state.value))
     },
     { deep: true }
