@@ -25,8 +25,8 @@ const verifyEmailHandler = () => {
     return
   }
   const payload = {
-    id: route.query.id,
-    code: route.query.code
+    id: route.query.id as string,
+    code: route.query.code as string
   }
   verifyEmail(payload)
     .then(() => {
