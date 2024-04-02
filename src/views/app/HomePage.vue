@@ -10,6 +10,7 @@ interface ProjectDetails {
   title: string
   supervisor: string
   year: string
+  id: string
 }
 
 // computed properties
@@ -18,101 +19,117 @@ const allProjects = computed<ProjectDetails[]>(() => [
     author: 'Iwuagwu Chibuzor Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
-    year: '2024'
+    year: '2024',
+    id: '1'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
-    year: '2024'
+    year: '2024',
+    id: '2'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2024'
+    year: '2024',
+    id: '3'
   },
   {
     author: 'Adeosun Oluwatunmise',
     title:
       'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2023'
+    year: '2023',
+    id: '4'
   },
   {
     author: 'Iwuagwu Chibuzor Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
-    year: '2024'
+    year: '2024',
+    id: '5'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
-    year: '2024'
+    year: '2024',
+    id: '6'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2024'
+    year: '2024',
+    id: '7'
   },
   {
     author: 'Adeosun Oluwatunmise',
     title:
       'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2023'
+    year: '2023',
+    id: '8'
   },
   {
     author: 'Iwuagwu Chibuzor Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
-    year: '2024'
+    year: '2024',
+    id: '9'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
-    year: '2024'
+    year: '2024',
+    id: '10'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2024'
+    year: '2024',
+    id: '11'
   },
   {
     author: 'Adeosun Oluwatunmise',
     title:
       'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2023'
+    year: '2023',
+    id: '12'
   },
   {
     author: 'Iwuagwu Chibuzor Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
-    year: '2024'
+    year: '2024',
+    id: '13'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
-    year: '2024'
+    year: '2024',
+    id: '14'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2024'
+    year: '2024',
+    id: '15'
   },
   {
     author: 'Adeosun Oluwatunmise',
     title:
       'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
     supervisor: 'Dr. Aderonke Sakpere',
-    year: '2023'
+    year: '2023',
+    id: '16'
   }
 ])
 

@@ -13,7 +13,7 @@ import {
   type LoginPayload
 } from '@/services/auth'
 
-export const useAuthStore = defineStore('counter', () => {
+export const useAuthStore = defineStore('useAuthStore', () => {
   // default state
   const getDefaultState = () => {
     const savedState = localStorage.getItem('authState')

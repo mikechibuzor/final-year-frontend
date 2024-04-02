@@ -1,14 +1,29 @@
 <script setup lang="ts">
+// vue router
+import { useRouter } from 'vue-router'
+
+// composable
+const router = useRouter()
+
 const props = defineProps({
   details: {
     type: Object,
     default: () => {}
   }
 })
+
+// functions
+
+const goToProjectDetails = () => {
+  router.push(`/project-details/${props.details.id}`)
+}
 </script>
 
 <template>
-  <section class="border border-primary rounded-xl shadow-sm flex flex-col px-8 py-6">
+  <section
+    class="border border-primary rounded-xl shadow-sm flex flex-col px-8 py-6 cursor-pointer transition-all duration-300 hover:shadow-2xl"
+    @click="goToProjectDetails"
+  >
     <!-- image -->
     <div class="h-48 w-32 bg-primary rounded-sm shadow-sm mx-auto"></div>
     <!-- title -->
