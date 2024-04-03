@@ -1,3 +1,3 @@
 <template>
-  <router-view class="max-w-[1520px] mx-auto" />
+  <router-view class="max-w-[1600px] mx-auto" />
 </template>

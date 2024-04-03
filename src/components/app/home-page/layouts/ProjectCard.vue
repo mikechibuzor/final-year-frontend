@@ -1,9 +1,11 @@
 <script setup lang="ts">
 // vue router
 import { useRouter } from 'vue-router'
+import { useProjectStore } from '@/store/project.store.ts'
 
 // composable
 const router = useRouter()
+const { setCurrentProjectDetails } = useProjectStore()
 
 const props = defineProps({
   details: {
@@ -15,6 +17,7 @@ const props = defineProps({
 // functions
 
 const goToProjectDetails = () => {
+  setCurrentProjectDetails(props.details)
   router.push(`/project-details/${props.details.id}`)
 }
 </script>
