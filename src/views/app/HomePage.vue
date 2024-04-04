@@ -20,21 +20,24 @@ const allProjects = computed<ProjectDetails[]>(() => [
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
-    id: '1'
+    id: '1',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
     year: '2024',
-    id: '2'
+    id: '2',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
-    id: '3'
+    id: '3',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Adeosun Oluwatunmise',
@@ -49,21 +52,24 @@ const allProjects = computed<ProjectDetails[]>(() => [
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
-    id: '5'
+    id: '5',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
     year: '2024',
-    id: '6'
+    id: '6',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
-    id: '7'
+    id: '7',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Adeosun Oluwatunmise',
@@ -78,21 +84,24 @@ const allProjects = computed<ProjectDetails[]>(() => [
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
-    id: '9'
+    id: '9',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
     year: '2024',
-    id: '10'
+    id: '10',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
-    id: '11'
+    id: '11',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Adeosun Oluwatunmise',
@@ -107,21 +116,24 @@ const allProjects = computed<ProjectDetails[]>(() => [
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
-    id: '13'
+    id: '13',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Hassan Jolaoluwa Batin',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. K.J',
     year: '2024',
-    id: '14'
+    id: '14',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Olawole Akindele Michael',
     title: 'Development of a Web-Based Past Projects Repository',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
-    id: '15'
+    id: '15',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Adeosun Oluwatunmise',

@@ -6,10 +6,6 @@ import { VuePDF, usePDF } from '@tato30/vue-pdf'
 
 import '@tato30/vue-pdf/style.css'
 
-const { pdf, pages } = usePDF(
-  'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
-)
-
 // icons
 import ArrowIcon from '@/assets/icons/ArrowIcon.vue'
 // components
@@ -22,6 +18,7 @@ import { useProjectStore } from '@/store/project.store.ts'
 // composable
 const router = useRouter()
 const { getCurrentProjectDetails } = useProjectStore()
+const { pdf, pages } = usePDF(getCurrentProjectDetails.link)
 
 // refs
 const scale = ref(1.5)
@@ -43,6 +40,11 @@ const handleSize = (type: string) => {
   }
 }
 const goBack = () => router.go(-1)
+const handleDownload = () => {
+  pdf.value.promise.then((doc) => {
+    doc.getData()
+  })
+}
 </script>
 <template>
   <main class="p-4 lg:p-8">
@@ -79,7 +81,7 @@ const goBack = () => router.go(-1)
         <!-- cite and download -->
         <p class="flex items-center justify-between w-full text-primary">
           <span class="cursor-pointer hover:underline"> Cite </span>
-          <span class="cursor-pointer hover:underline"> Download </span>
+          <span class="cursor-pointer hover:underline" @click="handleDownload"> Download </span>
         </p>
         <div class="border-4 rounded-lg border-black p-4 mt-10">
           <div v-for="page in pages" :key="page">
