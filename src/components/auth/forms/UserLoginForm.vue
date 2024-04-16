@@ -103,9 +103,14 @@ const validateForm = async (formEl: FormInstance | undefined) => {
       </el-form-item>
       <!-- login as admin -->
       <div class="flex items-center justify-between">
-        <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">
-          Login as Admin?
-        </p>
+        <div class="flex items-center gap-x-4">
+          <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">
+            Login as Admin?
+          </p>
+          <router-link class="text-xs font-medium underline cursor-pointer" to="/one-time-upload"
+            >One Time Upload?</router-link
+          >
+        </div>
         <router-link
           to="/forgot-password"
           class="text-xs font-medium underline text-primary cursor-pointer"

@@ -11,7 +11,7 @@ export function useHandleError() {
 
   const handleErrorResponseNotification = (error: any) => {
     isLoading.value = false
-    const err = error.response?.data?.errorMessages[0] || 'Something went wrong'
+    const err = error.response?.data?.errorMessages || 'Something went wrong'
     notify({
       title: 'Error',
       type: 'error',

@@ -1,0 +1,1 @@
+export const USER_MENU_VISIBLE_ROUTE = ['HomePage', 'ProjectDetails']
