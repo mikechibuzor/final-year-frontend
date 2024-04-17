@@ -41,8 +41,17 @@ const handleSize = (type: string) => {
 }
 const goBack = () => router.go(-1)
 const handleDownload = () => {
-  pdf.value.promise.then((doc) => {
-    doc.getData()
+  pdf.value?.promise.then((doc) => {
+    doc.getData().then((data) => {
+      const blob = new Blob([data], { type: 'application/pdf' })
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'your_filename.pdf'
+      document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(url)
+    })
   })
 }
 </script>

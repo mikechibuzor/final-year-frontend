@@ -209,7 +209,7 @@ onMounted(() => {
           <div
             v-for="(tab, index) in TABS"
             :key="index"
-            class="cursor-pointer transition-all duration-50 ease-in"
+            class="cursor-pointer transition-all duration-50 ease-in text-sm lg:text-base"
             :class="activeTabClass(tab.value)"
             @click="setActiveTab(tab.value)"
           >
@@ -220,7 +220,7 @@ onMounted(() => {
       <!-- projects -->
       <section
         v-if="!isLoadingTab"
-        class="grid gap-12 lg:grid-cols-3 items-center justify-center px-8 lg:px-48 mt-10"
+        class="grid gap-8 lg:grid-cols-3 items-center justify-center px-6 lg:px-48 mt-10"
       >
         <project-card v-for="(details, index) in allProjects" :key="index" :details="details" />
       </section>

@@ -25,6 +25,12 @@ const router = createRouter({
           name: 'ProjectDetails',
           component: () => import('@/views/app/ProjectDetails.vue'),
           meta: { title: `Web-Based Past Projects -`, pageTitle: 'Project Details' }
+        },
+         {
+          path: '/upload-project',
+          name: 'UploadProject',
+          component: () => import('@/views/app/UploadProject.vue'),
+          meta: { title: `Web-Based Past Projects -`, pageTitle: 'Upload Project' }
         }
       ]
     },

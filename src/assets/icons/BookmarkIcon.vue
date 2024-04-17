@@ -3,7 +3,7 @@
 import { computed } from 'vue'
 
 export interface BookmarkIconProps {
-  fill: string
+  fill?: string
   active: boolean
 }
 
