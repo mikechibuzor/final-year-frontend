@@ -107,7 +107,9 @@ const validateForm = async (formEl: FormInstance | undefined) => {
           <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">
             Login as Admin?
           </p>
-          <router-link class="text-xs font-medium underline cursor-pointer" to="/one-time-upload"
+          <router-link
+            class="text-xs font-medium underline cursor-pointer"
+            to="/upload-project?type=one-time-upload"
             >One Time Upload?</router-link
           >
         </div>

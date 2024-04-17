@@ -14,7 +14,7 @@ const router = createRouter({
       component: () => import(`@/views/app/index.vue`),
       beforeEnter: guardAppRoutes,
       children: [
-       {
+        {
           path: '/home',
           name: 'HomePage',
           component: () => import('@/views/app/HomePage.vue'),
@@ -25,12 +25,6 @@ const router = createRouter({
           name: 'ProjectDetails',
           component: () => import('@/views/app/ProjectDetails.vue'),
           meta: { title: `Web-Based Past Projects -`, pageTitle: 'Project Details' }
-        },
-         {
-          path: '/upload-project',
-          name: 'UploadProject',
-          component: () => import('@/views/app/UploadProject.vue'),
-          meta: { title: `Web-Based Past Projects -`, pageTitle: 'Upload Project' }
         }
       ]
     },
@@ -75,6 +69,12 @@ const router = createRouter({
           meta: { title: `Web-Based Past Projects - Set Password` }
         }
       ]
+    },
+    {
+      path: '/upload-project',
+      name: 'UploadProject',
+      component: () => import('@/views/app/UploadProject.vue'),
+      meta: { title: `Web-Based Past Projects -`, pageTitle: 'Upload Project' }
     }
   ]
 })
