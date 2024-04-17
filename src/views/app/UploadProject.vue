@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 // components
 import TheHeader from '@/components/app/home-page/layouts/TheHeader.vue'
+import UploadProjectForm from '@/components/app/upload-project/forms/UploadProjectForm.vue'
 // icons
 import ArrowIcon from '@/assets/icons/ArrowIcon.vue'
 
@@ -28,5 +29,7 @@ const goBack = () => router.go(-1)
       </div>
       <h4 class="text-center text-lg lg:text-2xl text-primary font-medium mt-12">Upload Project</h4>
     </section>
+    <!-- upload project form -->
+    <upload-project-form />
   </main>
 </template>
