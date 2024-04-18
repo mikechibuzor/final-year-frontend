@@ -96,6 +96,7 @@ const handleDownload = () => {
           <div v-for="page in pages" :key="page">
             <VuePDF
               :pdf="pdf"
+              :page="page"
               :text-layer="true"
               :scale="scale"
               :watermark-text="watermarkText"

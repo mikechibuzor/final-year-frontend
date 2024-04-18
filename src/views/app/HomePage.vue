@@ -101,7 +101,8 @@ const allProjects = computed<ProjectDetails[]>(() => [
       'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2023',
-    id: '8'
+    id: '8',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Iwuagwu Chibuzor Michael',
@@ -133,7 +134,8 @@ const allProjects = computed<ProjectDetails[]>(() => [
       'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2023',
-    id: '12'
+    id: '12',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   },
   {
     author: 'Iwuagwu Chibuzor Michael',
@@ -165,7 +167,8 @@ const allProjects = computed<ProjectDetails[]>(() => [
       'The Influence of Parenting style, Perceived Social Norms and Risk Propensity on Risky Behaviour among Undergraduates, University of Ibadan',
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2023',
-    id: '16'
+    id: '16',
+    link: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf'
   }
 ])
 
