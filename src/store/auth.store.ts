@@ -10,7 +10,9 @@ import {
   setPasswordService,
   type SetPasswordPayload,
   loginService,
-  type LoginPayload
+  type LoginPayload,
+  adminLoginService,
+  type AdminLoginPayload
 } from '@/services/auth'
 
 export const useAuthStore = defineStore('useAuthStore', () => {
@@ -60,6 +62,14 @@ export const useAuthStore = defineStore('useAuthStore', () => {
   const setPassword = (payload: SetPasswordPayload) => {
     return setPasswordService(payload)
   }
+  const adminLogin = async (payload: AdminLoginPayload) => {
+    const response = await adminLoginService(payload)
+    state.value.accessToken = response.data.accessToken
+    state.value.refreshToken = response.data.refreshToken
+        console.log(response.data.userDetails)
+    state.value.userDetails = response.data.userDetails
+    localStorage.setItem('token', state.value.accessToken)
+  }
   const setExtractedEmailVerificationId = (payload: string) =>
     (state.value.extractedEmailVerificationId = payload)
 
@@ -67,7 +77,7 @@ export const useAuthStore = defineStore('useAuthStore', () => {
     const response = await loginService(payload)
     state.value.accessToken = response.data.accessToken
     state.value.refreshToken = response.data.refreshToken
-    // state.value.userDetails = response.data.data
+    state.value.userDetails = response.data.userDetails
     localStorage.setItem('token', state.value.accessToken)
   }
 
@@ -92,6 +102,7 @@ export const useAuthStore = defineStore('useAuthStore', () => {
     setPassword,
     getExtractedEmailVerificationId,
     setExtractedEmailVerificationId,
-    login
+    login,
+    adminLogin
   }
 })

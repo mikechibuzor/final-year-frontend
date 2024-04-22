@@ -17,9 +17,10 @@ const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
 const { setPassword, getExtractedEmailVerificationId } = useAuthStore()
 
 // interface
-interface SetPasswordForm {
+interface SetUserCredentials {
   password: string
   confirmPassword: string
+  username: string
 }
 // composable
 const router = useRouter()
@@ -29,32 +30,33 @@ const ruleFormRef = ref<FormInstance>()
 const hiddenInput = ref('')
 
 // reactive
-const setPasswordForm = reactive<SetPasswordForm>({
+const setUserCredentials = reactive<SetUserCredentials>({
   confirmPassword: '',
-  password: ''
+  password: '',
+  username: ''
 })
 
 // functions
 const validatePasswordRequirement = (): void => {
   // Check if the password is at least 8 characters long
-  setPasswordForm.password.length < 8
+  setUserCredentials.password.length < 8
     ? (passwordRequirements[0].validity = false)
     : (passwordRequirements[0].validity = true)
   // Check if the password contains at least one uppercase letter (A-Z)
-  !/[A-Z]/.test(setPasswordForm.password)
+  !/[A-Z]/.test(setUserCredentials.password)
     ? (passwordRequirements[1].validity = false)
     : (passwordRequirements[1].validity = true)
   // Check if the password contains at least one lowercase letter (a-z)
-  !/[a-z]/.test(setPasswordForm.password)
+  !/[a-z]/.test(setUserCredentials.password)
     ? (passwordRequirements[2].validity = false)
     : (passwordRequirements[2].validity = true)
   // Check if the password contains at least one special character
   // eslint-disable-next-line no-useless-escape
-  !/[!@#\$%^&*(),.?":{}|<>]/.test(setPasswordForm.password)
+  !/[!@#\$%^&*(),.?":{}|<>]/.test(setUserCredentials.password)
     ? (passwordRequirements[3].validity = false)
     : (passwordRequirements[3].validity = true)
   // Check if the password contains at least one digit (0-9)
-  !/\d/.test(setPasswordForm.password)
+  !/\d/.test(setUserCredentials.password)
     ? (passwordRequirements[4].validity = false)
     : (passwordRequirements[4].validity = true)
 }
@@ -74,11 +76,12 @@ const validatePasswordHandler = (rule: any, value: any, callback: any): void => 
   }
 }
 
-const setPasswordHandler = async () => {
+const setUserCredentialsHandler = async () => {
   isLoading.value = true
   const payload = {
     id: getExtractedEmailVerificationId,
-    password: setPasswordForm.password
+    username: setUserCredentials.username,
+    password: setUserCredentials.password
   }
   await setPassword(payload)
     .then(() => {
@@ -99,7 +102,7 @@ const validateForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid: any): any => {
     if (valid) {
-      setPasswordHandler()
+      setUserCredentialsHandler()
     } else {
       notify({
         title: 'Error',
@@ -110,9 +113,7 @@ const validateForm = async (formEl: FormInstance | undefined) => {
   })
 }
 const rules = reactive<FormRules>({
-  confirmPassword: [
-    { required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
-  ],
+  username: [{ required: true, message: 'Please enter a username', trigger: ['blur', 'change'] }],
   password: [{ validator: validatePasswordHandler, trigger: ['blur', 'change'], required: true }]
 })
 const passwordRequirements = reactive([
@@ -143,15 +144,24 @@ const passwordRequirements = reactive([
     <el-form
       hide-required-asterisk
       ref="ruleFormRef"
-      :model="setPasswordForm"
+      :model="setUserCredentials"
       :rules="rules"
       label-position="top"
       @keydown.enter="validateForm(ruleFormRef)"
     >
+      <!-- username -->
+      <el-form-item label="Username" prop="username">
+        <el-input v-model="setUserCredentials.username" placeholder="Enter username">
+          <template #prefix>
+            <password-icon />
+          </template>
+        </el-input>
+        <el-input v-model="hiddenInput" class="hidden" />
+      </el-form-item>
       <!-- password -->
       <el-form-item label="Password" prop="password">
         <el-input
-          v-model="setPasswordForm.password"
+          v-model="setUserCredentials.password"
           type="password"
           show-password
           @input="validatePasswordRequirement"
@@ -164,7 +174,7 @@ const passwordRequirements = reactive([
         <el-input v-model="hiddenInput" class="hidden" />
       </el-form-item>
       <!-- confirm password -->
-      <div v-if="setPasswordForm.password">
+      <div v-if="setUserCredentials.password">
         <p class="text-black font-light text-xs lg:text-sm mt-3">At least</p>
         <div class="flex items-center gap-x-2 gap-y-1.5 flex-wrap my-2">
           <p
@@ -195,7 +205,7 @@ const passwordRequirements = reactive([
           :disabled="isLoading"
           class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
         >
-          {{ isLoading ? 'Logging in...' : 'Login' }}
+          {{ isLoading ? 'Setting...' : 'Set Credentials' }}
         </el-button>
       </div>
     </el-form>

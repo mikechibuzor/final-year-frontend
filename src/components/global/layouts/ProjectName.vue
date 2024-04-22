@@ -22,7 +22,7 @@ const router = useRouter()
 const route = useRoute()
 // computed
 const showUserMenu = computed(() => {
-  return USER_MENU_VISIBLE_ROUTE.includes(route.name) && route.query === 'one-time-upload'
+  return USER_MENU_VISIBLE_ROUTE.includes(route.name) || route.query === 'one-time-upload'
 })
 
 // functions

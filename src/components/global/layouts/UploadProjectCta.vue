@@ -9,12 +9,16 @@ import { useRouter, useRoute } from 'vue-router'
 // utils
 import { UPLOAD_PROJECT_CTA_ROUTE_EXCLUDED } from '@/utils/constants/index.ts'
 
+import { useSystemSession } from '@/composables/useSystemSession.ts'
+
 // composables
 const router = useRouter()
 const route = useRoute()
+const { isAdminSession } = useSystemSession()
 // computed
 const showUploadProjectCta = computed(() => {
-  return !UPLOAD_PROJECT_CTA_ROUTE_EXCLUDED.includes(route.name)
+  console.log(isAdminSession.value)
+  return !UPLOAD_PROJECT_CTA_ROUTE_EXCLUDED.includes(route.name) && isAdminSession.value
 })
 
 // functions

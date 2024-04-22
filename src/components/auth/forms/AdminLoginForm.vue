@@ -1,10 +1,20 @@
 <script setup lang="ts">
 // vue
 import { ref, reactive } from 'vue'
+// vue router
+import { useRouter } from 'vue-router'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
 
 import PasswordIcon from '@/assets/icons/PasswordIcon.vue'
+
+import { useAuthStore } from '@/store/auth.store'
+import { useHandleError } from '@/composables/useHandleError'
+
+// composable
+const router = useRouter()
+const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
+const { adminLogin } = useAuthStore()
 
 // interface
 interface LoginForm {
@@ -30,7 +40,32 @@ const rules = reactive<FormRules<LoginForm>>({
 })
 
 // functions
+const adminLoginEndpoint = async () => {
+  isLoading.value = true
+  await adminLogin(loginForm)
+    .then(() => {
+      isLoading.value = false
+      router.push('/home')
+    })
+    .catch((error) => {
+      handleErrorResponseNotification(error)
+    })
+}
 const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
+const validateForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid: any): any => {
+    if (valid) {
+      adminLoginEndpoint()
+    } else {
+      notify({
+        title: 'Error',
+        type: 'error',
+        text: 'Please fill all inputs correctly'
+      })
+    }
+  })
+}
 </script>
 <template>
   <main class="w-full mt-12 lg:mt-32">
@@ -40,6 +75,7 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
       :model="loginForm"
       :rules="rules"
       label-position="top"
+      @keydown.enter="validateForm(ruleFormRef)"
     >
       <!-- password -->
       <el-form-item label="Code" prop="code">
@@ -62,7 +98,12 @@ const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
       </div>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
-        <el-button class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm">
+        <el-button
+          @click="validateForm(ruleFormRef)"
+          :loading="isLoading"
+          :disabled="isLoading"
+          class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
+        >
           Login
         </el-button>
       </div>

@@ -35,9 +35,10 @@ export async function verifyEmailService(payload: VerifyEmailPayload) {
 export interface SetPasswordPayload {
   password: string
   id: string
+  username: string
 }
 export async function setPasswordService(payload: SetPasswordPayload) {
-  const res = await axios.post(`${baseUrlAuth}/set-password`, {
+  const res = await axios.patch(`${baseUrlAuth}/set-details`, {
     ...payload
   })
   return res
@@ -48,6 +49,15 @@ export interface LoginPayload{
 }
 export async function loginService(payload: LoginPayload) {
   const res = await axios.post(`${baseUrlAuth}/login`, {
+    ...payload
+  })
+  return res
+}
+export interface AdminLoginPayload{
+code: string
+}
+export async function adminLoginService(payload: AdminLoginPayload) {
+  const res = await axios.post(`${baseUrlAuth}/admin-login`, {
     ...payload
   })
   return res
