@@ -8,7 +8,7 @@ import './assets/css/main.css'
 import Notifications from '@kyvg/vue3-notification'
 import Vue3Lottie from 'vue3-lottie'
 import vue3Spinner from 'vue3-spinner'
-
+import setupInterceptors from '@/services/setupInterceptors'
 
 import App from './App.vue'
 import router from './router'
@@ -29,5 +29,5 @@ app.use(vue3Spinner)
 
 // registering global components
 app.component('ProjectName', ProjectName)
-
+setupInterceptors()
 app.mount('#app')

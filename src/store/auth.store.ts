@@ -39,6 +39,7 @@ export const useAuthStore = defineStore('useAuthStore', () => {
   const getUserDetails = computed(() => state.value.userDetails)
   const getResendLinkEmail = computed(() => state.value.resendLinkEmail)
   const getExtractedEmailVerificationId = computed(() => state.value.extractedEmailVerificationId)
+  const getAccessToken = computed(() => state.value.accessToken)
 
   // functions
   const incrementCount = () => {
@@ -103,6 +104,7 @@ export const useAuthStore = defineStore('useAuthStore', () => {
     getExtractedEmailVerificationId,
     setExtractedEmailVerificationId,
     login,
-    adminLogin
+    adminLogin,
+    getAccessToken
   }
 })

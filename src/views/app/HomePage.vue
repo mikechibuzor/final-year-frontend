@@ -8,6 +8,9 @@ import SearchBar from '@/components/app/home-page/layouts/SearchBar.vue'
 import ProjectCard from '@/components/app/home-page/layouts/ProjectCard.vue'
 import { ScaleLoader, MoonLoader } from 'vue3-spinner'
 
+// store
+import { useProjectStore } from '@/store/project.store'
+
 interface ProjectDetails {
   author: string
   title: string
@@ -31,7 +34,8 @@ const TABS = [
     value: 'history'
   }
 ]
-
+// composable
+const { fetchAllProjects } = useProjectStore()
 // refs
 const isLoading = ref(false)
 const isLoadingTab = ref(false)
@@ -176,11 +180,15 @@ const allProjects = computed<ProjectDetails[]>(() => [
 const handleCurrentChange = (page: number) => {
   return page
 }
-const getAllProjects = () => {
+const getAllProjects = async () => {
   isLoading.value = true
-  setTimeout(() => {
-    isLoading.value = false
-  }, 2000)
+  await fetchAllProjects()
+    .then(() => {
+      isLoading.value = false
+    })
+    .catch(() => {
+      isLoading.value = false
+    })
 }
 const activeTabClass = (tab: string) => {
   return isActiveTab.value === tab ? 'text-primary font-medium  border-b-2 border-b-primary' : ''

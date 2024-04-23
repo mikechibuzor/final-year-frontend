@@ -1,58 +1,81 @@
 <script setup lang="ts">
 // vue
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
 import { UploadFilled } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
 
 // icons
 import UploadProjectIcon from '@/assets/icons/UploadProjectIcon.vue'
-// notification
-import { useNotification } from '@kyvg/vue3-notification'
 
-// interface
-interface UploadProjectForm {
-  title: string
-  firstName: string
-  lastName: string
-  year: string
-  matric: string
-  supervisor: string
-  citation: string
-}
+// store
+import { useProjectStore } from '@/store/project.store'
+import { useSupervisorStore } from '@/store/supervisor.store'
+import { useHandleError } from '@/composables/useHandleError'
+
+import { type UploadProjectPayload } from '@/services/project'
 
 // emit
 const emit = defineEmits<{
   (e: 'toggleUploadProjectForm', index: number): void
 }>()
 // composable
-const { notify } = useNotification()
+const { uploadProject } = useProjectStore()
+const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
+const { fetchAllSupervisors, getAllSupervisors } = useSupervisorStore()
+const router = useRouter()
 // refs
 const ruleFormRef = ref<FormInstance>()
-const isLoading = ref(false)
 
 // reactive
-const uploadProjectForm = reactive<UploadProjectForm>({
+const uploadProjectForm = reactive<UploadProjectPayload>({
   title: '',
-  lastName: '',
-  firstName: '',
+  authorLastName: '',
+  authorFirstName: '',
   year: '',
-  matric: '',
-  supervisor: '',
-  citation: ''
+  matricNo: '',
+  supervisorId: '',
+  citation: '232323e',
+  projectDoc: null
 })
-const rules = reactive<FormRules<UploadProjectForm>>({
+const rules = reactive<FormRules<UploadProjectPayload>>({
   title: [
-    { required: true, message: 'Please enter a valid admin code', trigger: ['blur', 'change'] }
+    { required: true, message: 'Please enter a valid project title', trigger: ['blur', 'change'] }
+  ],
+  authorLastName: [
+    {
+      required: true,
+      message: 'Please enter a valid author last name',
+      trigger: ['blur', 'change']
+    }
+  ],
+  authorFirstName: [
+    {
+      required: true,
+      message: 'Please enter a valid author first name',
+      trigger: ['blur', 'change']
+    }
   ]
 })
 
 // function
+const uploadProjectHandler = async () => {
+  isLoading.value = true
+  await uploadProject(uploadProjectForm)
+    .then(() => {
+      isLoading.value = false
+      router.push('/home')
+    })
+    .catch((error) => {
+      handleErrorResponseNotification(error)
+    })
+}
 const validateForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid: any): any => {
     if (valid) {
-      console.log('ok')
+      uploadProjectHandler()
     } else {
       notify({
         title: 'Error',
@@ -62,6 +85,14 @@ const validateForm = async (formEl: FormInstance | undefined) => {
     }
   })
 }
+const handleBeforeUpload = (file: File) => {
+  uploadProjectForm.projectDoc = file
+  return !file
+}
+// hooks
+onMounted(() => {
+  fetchAllSupervisors()
+})
 </script>
 
 <template>
@@ -79,39 +110,46 @@ const validateForm = async (formEl: FormInstance | undefined) => {
       </el-form-item>
       <!-- author -->
       <div class="flex items-center gap-5">
-        <el-form-item label="Author" prop="firstName">
-          <el-input v-model="uploadProjectForm.firstName" placeholder="First name" />
+        <el-form-item label="Author" prop="authorFirstName">
+          <el-input v-model="uploadProjectForm.authorFirstName" placeholder="First name" />
         </el-form-item>
-        <el-form-item label="." prop="lastName">
-          <el-input v-model="uploadProjectForm.lastName" placeholder="Last name" />
+        <el-form-item label="." prop="authorLastName">
+          <el-input v-model="uploadProjectForm.authorLastName" placeholder="Last name" />
         </el-form-item>
       </div>
       <!-- supervisor -->
       <el-form-item label="Supervisor" prop="supervisor">
-        <el-select v-model="uploadProjectForm.supervisor">
-          <el-option value="Dr. O. Adeleke">Dr. O. Adeleke</el-option>
+        <el-select v-model="uploadProjectForm.supervisorId">
+          <el-option
+            v-for="(supervisor, index) in getAllSupervisors"
+            :key="index"
+            :value="supervisor.id"
+            >{{
+              supervisor.title + ' ' + supervisor.initials + ' ' + supervisor.lastName
+            }}</el-option
+          >
         </el-select>
       </el-form-item>
       <!-- year and matric -->
       <div class="flex items-center gap-5">
         <el-form-item label="Year" prop="year">
-          <el-input v-model="uploadProjectForm.firstName" placeholder="Enter year" />
+          <el-input v-model="uploadProjectForm.year" placeholder="Enter year" />
         </el-form-item>
         <el-form-item label="Matric Number" prop="matric">
-          <el-input v-model="uploadProjectForm.lastName" placeholder="Enter matric" />
+          <el-input v-model="uploadProjectForm.matricNo" placeholder="Enter matric" />
         </el-form-item>
       </div>
       <!-- citation -->
-      <el-form-item label="Citation" prop="citation">
+      <!-- <el-form-item label="Citation" prop="citation">
         <el-input
           v-model="uploadProjectForm.citation"
           :rows="8"
           type="textarea"
           placeholder="Please input"
         />
-      </el-form-item>
+      </el-form-item> -->
       <!-- upload file -->
-      <el-upload accept="pdf" :multiple="false" drag :auto-upload="false">
+      <el-upload accept="pdf" drag :before-upload="handleBeforeUpload">
         <el-icon class="el-icon--upload"><upload-filled /></el-icon>
         <div class="el-upload__text">Drop file here or <em>click to upload a project</em></div>
         <template #tip>
