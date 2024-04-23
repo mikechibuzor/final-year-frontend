@@ -5,8 +5,9 @@ import { type Component, computed, ref } from 'vue'
 //components
 import AdminLogin from '@/components/auth/layouts/login/AdminLogin.vue'
 import UserLogin from '@/components/auth/layouts/login/UserLogin.vue'
+import OneTimeUploadLogin from '@/components/auth/layouts/login/OneTimeUploadLogin.vue'
 
-const ComponentLists: Component = [UserLogin, AdminLogin]
+const ComponentLists: Component = [UserLogin, AdminLogin, OneTimeUploadLogin]
 
 // ref
 const activeComponentIndex = ref(0)

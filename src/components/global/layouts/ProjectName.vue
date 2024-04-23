@@ -22,8 +22,9 @@ const router = useRouter()
 const route = useRoute()
 // computed
 const showUserMenu = computed(() => {
-  return USER_MENU_VISIBLE_ROUTE.includes(route.name) || route.query === 'one-time-upload'
+  return USER_MENU_VISIBLE_ROUTE.includes(route.name) || route.query.type === 'one-time-upload'
 })
+const showProfileOption = computed(() => route.query.type !== 'one-time-upload')
 
 // functions
 const logoutHandler = () => {
@@ -44,7 +45,7 @@ const logoutHandler = () => {
     <el-dropdown v-if="showUserMenu">
       <user-icon />
       <template #dropdown>
-        <el-dropdown-menu>
+        <el-dropdown-menu v-if="showProfileOption">
           <el-dropdown-item>Profile</el-dropdown-item>
         </el-dropdown-menu>
         <el-dropdown-menu>

@@ -9,13 +9,43 @@ import FilterIcon from '@/assets/icons/FilterIcon.vue'
 // refs
 const searchInput = ref('')
 const selectedSearchParam = ref('')
+
+// search params
+const searchParams = [
+  {
+    label: 'Author First Name',
+    value: 'Author First Name'
+  },
+  {
+    label: 'Author Last Name',
+    value: 'Author Last Name'
+  },
+  {
+    label: 'Project Title',
+    value: 'Project Title'
+  },
+  {
+    label: 'Supervisor Name',
+    value: 'Supervisor Name'
+  },
+  {
+    label: 'Year',
+    value: 'Year'
+  },
+  {
+    label: 'Key Words',
+    value: 'Key Words'
+  }
+]
 </script>
 <template>
   <section class="flex items-center justify-center mt-[5rem]">
     <div class="flex w-[45rem]">
       <!-- dropdown select -->
       <el-select v-model="selectedSearchParam" class="lg:[18%] w-[15%]">
-        <el-option value="Actor">Actor</el-option>
+        <el-option v-for="(params, index) in searchParams" :key="index" :value="params.value">{{
+          params.label
+        }}</el-option>
       </el-select>
       <!-- input -->
       <el-input

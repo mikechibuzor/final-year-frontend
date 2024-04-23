@@ -57,8 +57,12 @@ const handleToggleBookmark = () => {
       {{ props.details.title }}
     </p>
     <!-- author -->
-    <p @click.self="goToProjectDetails" class="text-sm font-normal mt-10">
+    <p @click.self="goToProjectDetails" class="text-sm mt-10 font-semibold">
       {{ props.details.author }}
+    </p>
+    <!-- author -->
+    <p @click.self="goToProjectDetails" class="text-sm font-normal mt-1">
+      {{ props.details.supervisor }}
     </p>
     <!-- year -->
     <p @click.self="goToProjectDetails" class="text-sm font-normal text-left">

@@ -6,23 +6,22 @@ import { useRouter } from 'vue-router'
 // element plus
 import type { FormInstance, FormRules } from 'element-plus'
 
-//icons
-import EmailIcon from '@/assets/icons/EmailIcon.vue'
 import PasswordIcon from '@/assets/icons/PasswordIcon.vue'
 
 import { useAuthStore } from '@/store/auth.store'
 import { useHandleError } from '@/composables/useHandleError'
 
-// interface
-interface LoginForm {
-  email: string
-  password: string
-}
 // composable
 const router = useRouter()
 const { handleErrorResponseNotification, isLoading, notify } = useHandleError()
-const { login } = useAuthStore()
-// emits
+const { adminLogin } = useAuthStore()
+
+// interface
+interface LoginForm {
+  code: string
+}
+
+// emit
 const emit = defineEmits<{
   (e: 'toggleLoginForm', index: number): void
 }>()
@@ -32,34 +31,45 @@ const ruleFormRef = ref<FormInstance>()
 
 // reactive
 const loginForm = reactive<LoginForm>({
-  email: '',
-  password: ''
+  code: ''
 })
 const rules = reactive<FormRules<LoginForm>>({
-  email: [
-    { required: true, message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
-  ],
-  password: [{ required: true, message: 'Please enter your password', trigger: ['blur', 'change'] }]
+  code: [
+    {
+      required: true,
+      message: 'Please enter a valid one time upload code',
+      trigger: ['blur', 'change']
+    }
+  ]
 })
 
 // functions
-const handleToggleLoginForm = (componentIndex: number) => emit('toggleLoginForm', componentIndex)
-const loginEndpoint = async () => {
+// const adminLoginEndpoint = async () => {
+//   isLoading.value = true
+//   await adminLogin(loginForm)
+//     .then(() => {
+//       isLoading.value = false
+//       router.push('/home')
+//     })
+//     .catch((error) => {
+//       handleErrorResponseNotification(error)
+//     })
+// }
+const oneTimeUploadLoginEndpoint = () => {
   isLoading.value = true
-  await login(loginForm)
-    .then(() => {
-      isLoading.value = false
-      router.push('/home')
-    })
-    .catch((error) => {
-      handleErrorResponseNotification(error)
-    })
+  setTimeout(() => {
+    isLoading.value = false
+    localStorage.setItem('token', 'mockToken')
+    router.push('/upload-project?type=one-time-upload')
+  }, 2000)
 }
+const handleToggleLoginForm = () => emit('toggleLoginForm', 0)
 const validateForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid: any): any => {
     if (valid) {
-      loginEndpoint()
+      // adminLoginEndpoint()
+      oneTimeUploadLoginEndpoint()
     } else {
       notify({
         title: 'Error',
@@ -71,7 +81,7 @@ const validateForm = async (formEl: FormInstance | undefined) => {
 }
 </script>
 <template>
-  <main class="w-full">
+  <main class="w-full mt-12 lg:mt-32">
     <el-form
       hide-required-asterisk
       ref="ruleFormRef"
@@ -80,42 +90,24 @@ const validateForm = async (formEl: FormInstance | undefined) => {
       label-position="top"
       @keydown.enter="validateForm(ruleFormRef)"
     >
-      <!-- email -->
-      <el-form-item label="Email Address" prop="email">
-        <el-input v-model="loginForm.email" placeholder="Enter your email address">
-          <template #prefix>
-            <email-icon />
-          </template>
-        </el-input>
-      </el-form-item>
       <!-- password -->
-      <el-form-item label="Password" prop="password">
+      <el-form-item label="Code" prop="code">
         <el-input
-          v-model="loginForm.password"
+          v-model="loginForm.code"
           type="password"
           show-password
-          placeholder="Enter your password"
+          placeholder="Enter one time upload code"
         >
           <template #prefix>
             <password-icon />
           </template>
         </el-input>
       </el-form-item>
-      <!-- login as admin -->
+      <!-- login as user -->
       <div class="flex items-center justify-between">
-        <div class="flex items-center gap-x-4">
-          <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm(1)">
-            Login as Admin?
-          </p>
-          <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm(2)">
-            One Time Upload?
-          </p>
-        </div>
-        <router-link
-          to="/forgot-password"
-          class="text-xs font-medium underline text-primary cursor-pointer"
-          >Forgot Password?</router-link
-        >
+        <p class="text-xs font-medium underline cursor-pointer" @click="handleToggleLoginForm">
+          Login as User?
+        </p>
       </div>
       <!-- login button -->
       <div class="flex items-center justify-end mt-10">
@@ -125,7 +117,7 @@ const validateForm = async (formEl: FormInstance | undefined) => {
           :disabled="isLoading"
           class="bg-primary text-white w-36 py-6 px-8 rounded-lg cursor-pointer shadow-sm"
         >
-          {{ isLoading ? 'Logging in...' : 'Login' }}
+          Login
         </el-button>
       </div>
     </el-form>
