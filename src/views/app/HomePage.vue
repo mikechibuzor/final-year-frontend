@@ -49,7 +49,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
     id: '1',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Hassan Jolaoluwa Batin',
@@ -57,7 +57,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. K.J',
     year: '2024',
     id: '2',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Olawole Akindele Michael',
@@ -66,7 +66,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
     id: '3',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Adeosun Oluwatunmise',
@@ -82,7 +82,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
     id: '5',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Hassan Jolaoluwa Batin',
@@ -90,7 +90,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. K.J',
     year: '2024',
     id: '6',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Olawole Akindele Michael',
@@ -98,7 +98,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
     id: '7',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Adeosun Oluwatunmise',
@@ -107,7 +107,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2023',
     id: '8',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Iwuagwu Chibuzor Michael',
@@ -115,7 +115,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
     id: '9',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Hassan Jolaoluwa Batin',
@@ -123,7 +123,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. K.J',
     year: '2024',
     id: '10',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Olawole Akindele Michael',
@@ -131,7 +131,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
     id: '11',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Adeosun Oluwatunmise',
@@ -140,7 +140,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2023',
     id: '12',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Iwuagwu Chibuzor Michael',
@@ -148,7 +148,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. 0. Adeleke',
     year: '2024',
     id: '13',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Hassan Jolaoluwa Batin',
@@ -156,7 +156,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. K.J',
     year: '2024',
     id: '14',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Olawole Akindele Michael',
@@ -164,7 +164,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2024',
     id: '15',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   },
   {
     author: 'Adeosun Oluwatunmise',
@@ -173,7 +173,7 @@ const allProjects = computed<ProjectDetails[]>(() => [
     supervisor: 'Dr. Aderonke Sakpere',
     year: '2023',
     id: '16',
-    link: 'https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf'
+    link: `https://corsproxy.io/?${encodeURIComponent('https://aws-final-year-project.s3.eu-north-1.amazonaws.com/ef88db8c-09b3-47eb-a380-0285686f7295.pdf')}`
   }
 ])
 
